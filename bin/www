@@ -29,7 +29,7 @@ var server = http.createServer(app);
 server.listen(Config.ServerList.MainApplicationPort, function () {
   console.log("(---------------------------------)");
   console.log("|         Server Started...       |");
-  console.log("|    http://13.233.116.27:" + Config.ServerList.MainApplicationPort + "    |");
+  console.log("|    http://13.232.118.115:" + Config.ServerList.MainApplicationPort + "    |");
   console.log("(---------------------------------)");
 });
 
