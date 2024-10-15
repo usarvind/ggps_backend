@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+
+
+    .regardsText{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 33px;
+        color: #2C425D;
+    }
+    
+    .headerFont{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        color: #2C425D;
+        flex: none;
+        order: 0;
+        align-self: center;
+        flex-grow: 0;
+        
+    }
+
+    .bodyFont{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 26px;
+        letter-spacing: 0.01em;
+        color: #2C425D;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+
+    .footerFont{
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 20px;
+        text-align: center;
+        color: #2C425D;
+        flex: none;
+        order: 3;
+        align-self: center;
+        flex-grow: 0;
+        margin: 0px 30px;
+    }
+
+       .fottertexttop{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 18px;
+        letter-spacing: -0.02em;
+        color: #6270D1;
+    }
+
+    .fottertextcenter{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: -0.02em;
+        color: #878787;
+    }
+
+  
+</style>
+<body style="margin: 0; padding: 0;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%"> 
+        <tr>
+            <td style="padding: 10px 0 30px 0;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" width="auto" style="border: 1px solid #cccccc; border-collapse: collapse;">
+                    <tr>
+                        <td align="left" bgcolor="#F2F5F8" style="padding: 40px 0 30px 30px; color: #6270D1; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
+                            <img src="./lib/templates/apolloLogo.svg">
+                        </td>
+                    </tr>
+                    
+                        <tr style="border-top:2px solid red;">
+                            <td align="left" bgcolor="#fff" style="padding: 40px 0px 30px 30px; ">
+                                <span class="headerFont" style="padding: 40px 0 30px 0;">Registration Successful</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" bgcolor="#fff" style="padding: 0px 30px 30px 30px; ">
+                                <span class="bodyFont">Dear {{fullName}}, <br><br>Your registration with Apollo Tyres | Complaint Digitisation has been completed successfully on {{dateTime}}. 
+                                    <br><br>Below are your login details: <br><b>Login ID: </b> {{userName}} <br><b>Password: </b> {{password}}
+                                    <br><b>Complaint Digitisation Portal :</b> <span style="color:#1155CC">{{url}}</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" bgcolor="#fff" style="padding: 0px 30px 30px 30px; ">
+                                <span class="bodyFont">Note : This is a system generated email, do not reply to this email.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" bgcolor="#fff" style="padding: 0px 30px 30px 30px; ">
+                                <span class="regardsText">Regards,<br>Apollo Tyres Team </span>
+                            </td>
+                        </tr>
+                    
+                   
+                    <tr>
+                        <td  bgcolor="#F7F9FC" style="padding: 15px 0 30px 15px; ">
+                            <p class="fottertexttop"><span>©{{year}} Apollo Tyres Ltd | All Rights Reserved</span></p>
+                            <p class="fottertextcenter">R7 Institutional Area, Sector 32 - Gurgaon 122001, India | (+91) 124 2721000 <br><span class="fottertexttop">apollodirect@apollotyres.com</span></p>
+                                   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  bgcolor="#40474E" style="padding: 15px 0 30px 15px; ">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td width="260" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5px;">
+                                            <tr>
+                                                <td>
+                                                    <img src="./lib/templates/apolloLogo.svg">
+                                                </td>
+                                            </tr>
+                                          
+                                        </table>
+                                    </td>
+                                    <td style="font-size: 0; line-height: 0;" width="20">
+                                        &nbsp;
+                                    </td>
+                                    <td width="260" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 8px; text-align: end; margin-left: -20px;">
+                                            <tr>
+                                                <td>
+                                                    <img src="./lib/templates/facebook.png">
+                                                    <img src="./lib/templates/twitter.png">
+                                                    <img src="./lib/templates/linkedin.png">
+                                                    <img src="./lib/templates/youtube.png">
+                                                </td>
+                                            </tr>
+                                          
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </td>
+                    </tr>   
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

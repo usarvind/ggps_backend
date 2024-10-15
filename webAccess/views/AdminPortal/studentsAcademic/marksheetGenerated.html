@@ -1,0 +1,789 @@
+      
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Marksheet Result</title>
+        <link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/AdmitCard/font-awesome.min.css">
+        <!-- CSS only -->
+        <link href="{{config.baseUrl}}AdminPortal/AdmitCard/bootstrap.min.css" rel="stylesheet" >
+
+    </head>
+    <style>
+      .markUl {
+        display: inline-flex;
+        list-style: none;
+        width: 100%;
+        padding-left: 0px !important;
+        margin-bottom: 1px !important;
+       
+      }
+      .markUl > li{
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
+        text-align: center;
+        width: 50%;
+        
+      }
+
+      
+
+      /* .markUl > li:first-child{
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
+        text-align: center;
+        width: 60%;
+
+      }
+
+      .markUl > li:last-child{
+        border-style: solid;
+        border-width: 1px;
+        border-color: black;
+        text-align: center;
+        width: 40%;
+
+      } */
+      
+      
+     
+
+      .markUl2 {
+        display: inline-flex;
+        list-style: none;
+        width: 100%;
+        padding-left: 0px !important;
+        margin-bottom: 1px !important;
+       
+      }
+      .markUl2 > li:first-child{
+        border-style: solid;
+        border-width: 0px;
+        border-color: black;
+        text-align: left;
+        width: 30%;
+       
+      }
+
+
+
+      .markUl22 {
+        display: inline-flex;
+        list-style: none;
+        width: 100%;
+        padding-left: 0px !important;
+        margin-bottom: 1px !important;
+       
+      }
+      .markUl22 > li:first-child{
+        border-style: solid;
+        border-width: 0px;
+        border-color: black;
+        text-align: left;
+        width: 50%;
+       
+      }
+
+      .markUl22 > li:last-child{
+        width: 50%;
+        border-bottom: 1.5px solid;
+      }
+
+
+
+      .totalMarkUL {
+        display: inline-flex;
+        list-style: none;
+        width: 100%;
+        padding-left: 0px !important;
+        margin-bottom: 1px !important;
+      }
+
+      .totalMarkUL > li{
+        width: 100%;
+        border-bottom: 0px ;
+        font-weight: 700;
+      }
+
+      .markUl2 > li:last-child{
+      
+        width: 70%;
+        border-bottom: 1.5px solid;
+      }
+
+
+
+      
+      .markUl3 {
+        display: inline-flex;
+        list-style: none;
+        width: 100%;
+        padding-left: 0px !important;
+        margin-bottom: 1px !important;
+        font-weight: 500;
+       
+      }
+      .markUl3 > li:first-child{
+        border-style: solid;
+        border-width: 0px;
+        border-color: black;
+        text-align: left;
+        width: 30%;
+       
+      }
+
+      .markUl3 > li:last-child{
+      
+        width: 70%;
+        border-bottom: 1px solid;
+      }
+
+   
+
+      .markUl4 {
+        display: inline-flex;
+        list-style: none;
+        width: 100%;
+        padding-left: 0px !important;
+        margin-bottom: 1px !important;
+        background-color:black;
+       
+      }
+      .markUl4 > li{
+        border-style: solid;
+        border-width: 0px;
+        border-color: black;
+        text-align: center;
+        width: 100%;
+        color:white;
+        margin-bottom:2px;
+      }
+
+      .rowBottomLine{
+        border-bottom: 2px solid black;
+        padding-bottom: 3px;
+      }
+
+   
+
+      .tableNoTr_top_bottom_Border{
+        border-top-width: 0 !important;
+        border-bottom-width: 0px !important;
+        
+      }
+
+      .tableTr_bottom_Border{
+        border-top-width: 0 !important;
+        /* border-bottom-width: 1px !important; */
+        
+      }
+
+      .tableNoTrBorderLast{
+        border-top-width: 0 !important;
+       
+      }
+
+
+      .tabletdNoBorderFirst{
+        border-right-width: 0 !important;
+      }
+
+      .tabletdNoBorderLast{
+        border-left-width: 0 !important;
+      }
+
+      .tabletdNoBorderMiddle{
+        border-left-width: 0 !important;
+        border-right-width: 0 !important;
+      }
+      .annualText{
+        text-align: center;
+        border-bottom: 2px solid;
+        padding-bottom: 4px;
+      }
+      .title_college{
+        font-size: 3.2rem;
+        font-weight: 800;
+        margin-bottom: 0px !important;
+      }
+      .subtitle1_college{
+        /* text-align: center; */
+        margin-left: 21%;
+        font-size: 1.5rem;
+        margin-bottom: 0px !important;
+        font-weight: 700;
+      }
+
+      .subtitle2_college{
+        /* text-align: center; */
+        margin-left: 25%;
+        font-size: 1.5rem;
+        margin-bottom: 0px !important;
+        font-weight: 700;
+      }
+
+      .rowTop{
+        padding-top: 10px;
+      }
+      
+
+
+      @media print  {
+        .markUl > li{
+          font-size: 13px;
+
+        }
+        .media_height{
+          min-height: 540px;
+        }
+        .title_college{
+          font-size: 1.9rem;
+          font-weight: 800;
+          margin-bottom: 0px !important;
+        }
+          .subtitle1_college{
+          /* text-align: center; */
+          font-size: 1.2rem;
+          margin-bottom: 0px !important;
+          font-weight: 700;
+          margin-left: 21%;
+        }
+
+        .subtitle2_college{
+          /* text-align: center; */
+          font-size: 1.1rem;
+          margin-bottom: 0px !important;
+          font-weight: 700;
+          margin-left: 25%;
+        }
+
+
+      .markUl3 {
+     
+        font-size: 15px;
+       
+       
+      }
+      .markUl3 > li:first-child{
+      
+        width: 37%; 
+        font-size: 14px;
+        font-weight: 500;
+       
+      }
+
+      .markUl3 > li:last-child{
+      
+        width: 63%;
+        font-size: 14px;
+        font-weight: 500;
+      }
+   
+      .markUl {
+       font-size: 13px;
+       
+      }
+
+      .markUl4 {
+        display: inline-flex;
+        list-style: none;
+        width: 100%;
+        padding-left: 0px !important;
+        margin-bottom: 1px !important;
+        background-color:black;
+
+        -webkit-print-color-adjust: exact; 
+      }
+
+
+      .markUl4> li{
+        border-style: solid;
+        border-width: 0px;
+        border-color: black;
+        text-align: center;
+        width: 100%;
+        color:white;
+        margin-bottom:2px;
+
+        -webkit-print-color-adjust: exact; 
+      }
+      
+      @page { size: auto;  margin: 3mm; }
+
+      .table>:not(caption)>*>* {
+          padding: 0.3rem 0.3rem !important;
+      }
+
+      
+     
+      }
+
+      
+      
+    </style>
+    <body >
+    <div class="container" style="max-width:1208px;">
+    
+      <div class="row rowTop">
+        <!-- {{data|dump}} -->
+        <div class="col-2">
+          <img src="{{config.baseUrl}}AdminPortal/student_icard/result_logo.jpg" width="70%" height="72%" style="display: block;margin: auto;">
+        </div>
+        <div class="col-10 ">
+            <p class="title_college ">GAYATRI GURUKUL PUBLIC SCHOOL</p>
+            <p class="subtitle1_college">Saraykalidas, Mariahu, Jaunpur </p>
+            <p class="subtitle2_college">U.P. INDIA PIN-222161</p>
+        </div>
+      </div>
+      <div class="row rowBottomLine">
+        <ul class="markUl4">
+          <li>   UDISE CODE - 09642105002</li>
+        </ul>
+      </div>
+      <div class="row">
+          <div class="col-1">
+          </div>
+
+          <div class="col-11">
+            <h4 class="annualText"> {{'Half Year Progress Report' if(data.isHalfYealy==true and  resultAction=='half_year') else 'Progress Report For the Academic Year ' }} : {{data.academicYear+'-'+(1*data.academicYear+1)}}</h4>
+          </div>
+
+          <div class="col-2">
+          </div>
+      </div>
+
+      <div class="row" style="padding: 12px 0 12px 0;">
+        <div class="col-6">
+          <ul class="markUl3">
+            <li> SCHOLAR NO :</li>
+            <li>{{data.GRNo}}</li>
+          </ul>
+          <ul class="markUl3">
+            <li> STUDENT'S NAME :</li>
+            <li>{{data.fullname}}</li>
+          </ul>
+
+          <ul class="markUl3">
+            <li> FATHER'S NAME :</li>
+            <li>Mr . {{data.fatherName}}</li>
+          </ul>
+
+          <ul class="markUl3">
+            <li> MOTHER'S NAME :</li>
+            <li>Mrs. {{data.motherName}}</li>
+          </ul>
+        </div>
+        <div class="col-4">
+          <ul class="markUl3">
+            <li> ROLL NO :</li>
+            <li>{{data.rollno}}</li>
+          </ul>
+          <ul class="markUl3">
+            <li> STANDARD :</li>
+            <li>{{data.studentClass}}</li>
+          </ul>
+
+          <ul class="markUl3">
+            <li> DOB :</li>
+            <li>{{data.dob}}</li>
+          </ul>
+        </div>
+        <div class="col-2">
+            <img src="{{config.baseUrl}}AdminPortal/student/{{data.studentImage}}" width="100" height="90" style="display: block;margin: auto;">
+        </div>
+      </div>
+      {% if(data.isHalfYealy==true and resultAction=='half_year') %}
+        <div class="row media_height">
+         
+            <table class="table table-bordered table-height">
+              <thead>
+              
+                <tr>
+                  <th rowspan="2" colspan="2">Subject (Scholastic Area)</th>
+                  <th ></th>
+                  <th colspan="2" class="text-center">Marks Obtd. </th>
+                  <!-- <th colspan="4">Annual</th> -->
+                  <!-- <th rowspan="2">Max Marks</th> -->
+                  <th rowspan="2" colspan="2" class="text-center">Total Marks</th>
+                </tr>
+                <tr>
+                  <th class="text-center">MM</th>
+                  <th class="text-center">I</th>
+                  <th class="text-center">II</th>
+                  <!-- <th>GD</th> -->
+                  <!-- <th>MM</th>
+                  <th>MO(I)</th>
+                  <th>MO(II)</th> 
+                  <th>GD</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in data.resultData %}
+                <!-- {{row|dump}} -->
+                <tr>
+                  <td colspan="2">{{row.subjectName}}</td>
+                  <td class="text-center">{{row.halfYearMarkMM}}</td>
+                  <td class="text-center">{{row.halfYearMarkMO}}</td>
+                  <td class="text-center">{{row.halfYearMarkMO2}}</td>
+                  <!-- <td>{{row.halfYearSubjectGrade}}</td> -->
+                  <!-- <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td> -->
+                  <!-- <td>{{row.halfYearTotMark}}</td> -->
+                  <td class="text-center">{{row.halfYearTotMarkObtainSubject}}</td>
+                 
+                  <td class="text-center">{{row.halfYearSubjectGrade}}</td>
+                </tr>
+                {% endfor %}
+
+                <tr class="tableNoTr_top_bottom_Border">
+                  <td  colspan="7" ><br><br></td>
+                </tr>
+                
+
+                <tr class="tableNoTr_top_bottom_Border">
+                  <!-- <td colspan="3" class="tabletdNoBorderFirst">
+                    <ul class="markUl">
+                      <li><b>Attendance</b></li>
+                      <li>{{data.studentAttendencePerct}}%</li>
+
+                    </ul>
+                  </td> -->
+                  <td colspan="2" class="tabletdNoBorderFirst">
+                    <ul class="markUl">
+                      <li><b> All Marks</b></li>
+                      <li>{{data.halfYearTotalCalData.studentTotalMarkObtain+"/"+data.halfYearTotalCalData.studentTotalMark}}</li>
+                    </ul>
+                  </td>
+
+                  <td colspan="3" class="tabletdNoBorderMiddle">
+                    <ul class="markUl">
+                        <li><b>Percentage</b></li>
+                        <li>{{data.halfYearTotalCalData.studentOverallPerct+'%'}}</li>
+                    </ul>    
+                  
+                  </td>
+                  <td colspan="2" class="tabletdNoBorderLast">
+                    <ul class="markUl">
+                        <li><b>Grade</b></li>
+                        <li>{{data.halfYearTotalCalData.studentOverallGrade}}</li>
+                    </ul>
+                  </td>
+                  <!-- <td colspan="1" class="tabletdNoBorderLast">
+                    <ul class="markUl">
+                        <li><b>Rank</b></li>
+                        <li>1001</li>
+                    </ul>    
+                  </td>
+                </tr> -->
+
+
+                <!-- <tr class="tableNoTr_top_bottom_Border">
+                  <td  colspan="7" class="tabletdNoBorder">
+                  </td>
+                </tr> -->
+
+                <tr class="tableNoTr_top_bottom_Border">
+                  <td colspan="1" class="tabletdNoBorderFirst">
+                    <ul class="markUl2">
+                      <li><b>Rank: </b></li>
+                      <li></li>
+
+                    </ul>
+                  </td>
+                  <td colspan="4" class="tabletdNoBorderMiddle">
+                    <ul class="markUl2">
+                      <li><b> Remarks:</b></li>
+                      <li class="text-center">{{data.resultRemarks}}</li>
+                    </ul>
+                  </td>
+
+                  <td colspan="2" class="tabletdNoBorderLast">
+                    <ul class="markUl2">
+                        <li><b>Result:</b></li>
+                        <li class="text-center"> {{data.result}}</li>
+                    </ul>    
+                  
+                  </td>
+
+                </tr>
+                <!-- <tr class="tableNoTr_top_bottom_Border">
+                  <td  colspan="7" class="tabletdNoBorder">
+                  
+                  </td>
+                </tr> -->
+                <tr class="tableNoTr_top_bottom_Border">
+
+                  <td colspan="4" class="tabletdNoBorderFirst">
+                    <ul class="markUl2">
+                      <li><b>Promoted to Std. : </b></li>
+                      <li class="text-center"> {{data.promoted}}</li>
+
+                    </ul>
+                  </td>
+
+                  <td colspan="3" class="tabletdNoBorderLast">
+                    <ul class="markUl2">
+                        <li><b>Division:</b></li>
+                        <li class="text-center">{{data.division}}</li>
+                    </ul>    
+                  
+                  </td>
+                </tr>
+
+                <!-- <tr class="tableNoTr_top_bottom_Border">
+                  <td  colspan="7" class="tabletdNoBorder">
+                  
+                  </td>
+                </tr> -->
+                
+                <tr class="tableTr_bottom_Border">
+                  <td colspan="2" class="tabletdNoBorderFirst">
+                    <ul class="markUl22">
+                      <li><b>Teacher's Sigature : </b></li>
+                      <li></li>
+
+                    </ul>
+                  </td>
+                  <td colspan="5" class="tabletdNoBorderLast">
+                    <ul class="markUl22">
+                      <li><b> Principal's Signature:</b></li>
+                      <li></li>
+                    </ul>
+                  </td>
+
+                </tr>
+
+               
+
+
+              </tbody>
+            </table>
+         
+        </div>
+      {% endif %} 
+
+      
+      {% if(data.isYealy==true and resultAction=='yearly') %}
+      <div class="row media_height">
+       
+          <table class="table table-bordered table-height">
+            <thead>
+            
+              <tr>
+                <th rowspan="2" colspan="2">Subject (Scholastic Area)</th>
+                <th></th>
+                <th colspan="2" class="text-center">Mark Obtd.</th>
+                
+                <th rowspan="2" colspan="2" class="text-center">Total Marks</th>
+              </tr>
+              <tr>
+              
+                <th class="text-center">MM</th>
+                <th class="text-center">I</th>
+                <th class="text-center">II</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in data.resultData %}
+              <tr>
+                <td colspan="2">{{row.subjectName}}</td>
+               
+                <td class="text-center">{{row.yearMarkMM}}</td>
+                <td class="text-center">{{row.yearMarkMO}}</td>
+                <td class="text-center">{{row.yearMarkMO2}}</td>
+               
+               
+                <td class="text-center">{{row.yearTotMarkObtainSubject}}</td>
+                <td class="text-center">{{row.yearSubjectGrade}}</td>
+              </tr>
+              {% endfor %}
+
+         
+              <tr class="tableNoTr_top_bottom_Border">
+                <td colspan="2" class="tabletdNoBorderFirst">
+                </td>
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                  <ul class="totalMarkUL">
+                    <li class="text-center">{{data.annualYearTotalCalData.studentTotalMark}}</li>
+                  </ul>
+                </td>
+
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                </td>
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                  <ul class="totalMarkUL">
+                    <li class="text-center">Total</li>
+                  </ul>
+                </td>
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                  <ul class="totalMarkUL">
+                    <li class="text-center">{{data.annualYearTotalCalData.studentTotalMarkObtain}}</li>
+                  </ul>
+                </td>
+                <td colspan="1" class="tabletdNoBorderLast">
+                  <ul class="totalMarkUL">
+                    <li class="text-center"></li>
+                  </ul>
+                </td>
+
+              </tr>
+
+              <tr class="tableNoTr_top_bottom_Border">
+                <td colspan="2" class="tabletdNoBorderFirst">
+                </td>
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                  <ul class="totalMarkUL">
+                    <li class="text-center">{{data.halfYearTotalCalData.studentTotalMark}}</li>
+                  </ul>
+                </td>
+
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                  <ul class="totalMarkUL">
+                    <li class="text-center">Half Yearly</li>
+                  </ul>
+                </td>
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                  <ul class="totalMarkUL">
+                    <li class="text-center">Total</li>
+                  </ul>
+                </td>
+                <td colspan="1" class="tabletdNoBorderMiddle">
+                  <ul class="totalMarkUL">
+                    <li class="text-center">{{data.halfYearTotalCalData.studentTotalMarkObtain}}</li>
+                  </ul>
+                </td>
+                <td colspan="1" class="tabletdNoBorderLast">
+                  <ul class="totalMarkUL">
+                    
+                  </ul>
+                </td>
+           
+              </tr>
+
+              <tr class="tableNoTr_top_bottom_Border">
+                <td colspan="3" class="tabletdNoBorderFirst">
+                  <ul class="markUl">
+                    <li><b> All Marks</b></li>
+                    <li>{{data.finalYearlyTotalCalData.studentTotalMarkObtain+"/"+data.finalYearlyTotalCalData.studentTotalMark}}</li>
+                  </ul>
+                </td>
+
+                <td colspan="2" class="tabletdNoBorderMiddle">
+                  <ul class="markUl">
+                      <li><b>Percentage</b></li>
+                      <li>{{data.finalYearlyTotalCalData.studentOverallPerct+'%'}}</li>
+                  </ul>    
+                
+                </td>
+                <td colspan="2" class="tabletdNoBorderLast">
+                  <ul class="markUl">
+                      <li><b>Grade</b></li>
+                      <li>{{data.finalYearlyTotalCalData.studentOverallGrade}}</li>
+                  </ul>
+                </td>
+              
+
+
+                <!-- <tr class="tableNoTr_top_bottom_Border">
+                  <td  colspan="7" class="tabletdNoBorder">
+                    
+                  </td>
+                </tr> -->
+
+                <tr class="tableNoTr_top_bottom_Border">
+                  <td colspan="1" class="tabletdNoBorderFirst">
+                    <ul class="markUl2">
+                      <li><b>Rank: </b></li>
+                      <li></li>
+
+                    </ul>
+                  </td>
+                  <td colspan="4" class="tabletdNoBorderMiddle">
+                    <ul class="markUl2">
+                      <li><b> Remarks:</b></li>
+                      <li class="text-center">{{data.resultRemarks}}</li>
+                    </ul>
+                  </td>
+
+                  <td colspan="2" class="tabletdNoBorderLast">
+                    <ul class="markUl2">
+                        <li><b>Result:</b></li>
+                        <li class="text-center"> {{data.result}}</li>
+                    </ul>    
+                  
+                  </td>
+
+                </tr>
+                <!-- <tr class="tableNoTr_top_bottom_Border">
+                  <td  colspan="7" class="tabletdNoBorder">
+                  
+                  </td>
+                </tr> -->
+                <tr class="tableNoTr_top_bottom_Border">
+
+                  <td colspan="4" class="tabletdNoBorderFirst">
+                    <ul class="markUl2">
+                      <li><b>Promoted to Std. : </b></li>
+                      <li class="text-center"> {{data.promoted}}</li>
+
+                    </ul>
+                  </td>
+
+                  <td colspan="3" class="tabletdNoBorderLast">
+                    <ul class="markUl2">
+                        <li><b>Division:</b></li>
+                        <li class="text-center">{{data.division}}</li>
+                    </ul>    
+                  
+                  </td>
+                </tr>
+
+                <!-- <tr class="tableNoTr_top_bottom_Border">
+                  <td  colspan="7" class="tabletdNoBorder">
+                   
+                  
+                  </td>
+                </tr> -->
+                
+                <tr class="tableTr_bottom_Border">
+                  <td colspan="3" class="tabletdNoBorderFirst">
+                    <ul class="markUl22">
+                      <li><b>Teacher's Sigature : </b></li>
+                      <li></li>
+
+                    </ul>
+                  </td>
+                  <td colspan="4" class="tabletdNoBorderLast">
+                    <ul class="markUl22">
+                      <li><b> Principal's Signature:</b></li>
+                      <li></li>
+                    </ul>
+                  </td>
+
+                </tr>
+             
+
+            </tbody>
+          </table>
+       
+      </div>
+    {% endif %} 
+
+    </div>
+
+    </body>
+    </html>
+
+
+
+    <script type="text/javascript">
+      function calculateResultMark(ths){
+        console.log(ths)
+      }
+    </script>

@@ -1,0 +1,199 @@
+
+    @media (min-width: 601px) {
+        #page {
+            background: url('planics.png') repeat-x;
+        }
+        }
+    
+            @media (max-width: 600px) {
+            #page {      
+                background: url('planics.png') repeat-x;
+            }
+        }
+    
+        *{
+            box-sizing: border-box;
+        
+        }
+        .container{
+            position: absolute;
+            left: 9%;
+            top:2%;
+        }
+        .card{
+            height: 290px;
+            width: 203px;
+            padding: 1.3rem 0 1.3rem 0;
+            box-shadow: 0 0 5px #b4b4b4;
+            background-image: url('../../../../AdminPortal/student_icard/bgecard2.jpg');
+            background-repeat: no-repeat;
+            background-size: 201.4px 289px;
+            border-radius: 4px;
+        }
+        @media print {
+            .card{
+                background-image: url('../../../../AdminPortal/student_icard/bgecard2.jpg');
+                -webkit-print-color-adjust: exact; 
+            }
+        }
+        .companyname{
+            position: absolute;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 1.09rem;
+            margin-top: .5rem;
+            top: 4.3%;
+            left: 3%;
+            color: oldlace;
+        }
+        .company-img{
+            position: absolute;
+            top: 3%;
+            left: 7%;
+            max-width: 50px;
+        }
+        .profile-img{
+            position: absolute;
+            top: 36%;
+            left: 33%;
+            width: 66px;
+            height: 63px;
+            border-radius: 11%;
+            border: 3px solid rgba(255, 255, 255, .2);
+        }
+        .profile-name{
+            position: absolute;
+            top: 70%;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 1.6rem;
+            margin-top: .5rem;
+            color: darkblue;
+        }
+        .profile-username{
+            position: absolute;
+            top: 78%;
+            font-weight: 300;
+            text-transform: lowercase;
+            font-size: 1rem;
+            margin-top: .5rem;
+            text-align: center;
+            color: navy;
+        }
+        .squre-qr{
+            position: absolute;
+            align-items: center;
+            top: 20%;
+            left: 30%;
+            height: 80px;
+            width: 80px;
+            box-shadow: 0 0 100px #b4b4b4;
+        }
+        .dt{
+            top: 59%;
+            position: absolute;
+            font-weight: 400;
+            font-size: 9px;
+            margin-top: 8px;
+            color: darkblue;
+            left: 3%;
+        }
+        .dt-sn{
+            top: 20%;
+            position: absolute;
+            font-weight: 800;
+            font-size: 10px;
+            margin-top: 8px;
+            color: red;
+            left: 8%;
+        }
+        .dt-sn-session{
+            top: 37%;
+            position: absolute;
+            font-weight: 600;
+            font-size: 7px;
+            margin-top: 8px;
+            color: #ec0f04;
+            left: -12%;
+            transform: rotate(-90deg);
+        }
+        .dt-student-name{
+            top: 51%;
+            /* position: absolute; */
+            font-weight: 800;
+            font-size: 10px;
+            margin-top: 145px;
+            color: red;
+            /* left: 14%; */
+            /* display: block; */
+            /* margin: auto; */
+            letter-spacing: 0.5px;
+        }
+    
+        .dt-sn-address{
+            top: 24%;
+            position: absolute;
+            font-weight: 600;
+            font-size: 9px;
+            margin-top: 8px;
+            color: #3ca183;
+            left: 12%;
+        }
+    
+        .dt-sn-mobile{
+            top: 29%;
+            position: absolute;
+            font-weight: 600;
+            font-size: 8px;
+            margin-top: 6px;
+            color: #ec0f04;
+            left: 34%;
+        }
+    
+        .dt1{
+            top: 68%;
+            position: absolute;
+            font-weight: 400;
+            font-size: 9px;
+            margin-top: -5px;
+            color: darkblue;
+            left: 3%;
+        }
+        .dt2{
+            top: 70%;
+            position: absolute;
+            font-weight: 400;
+            font-size: 9px;
+            margin-top: 1px;
+            color: darkblue;
+            left: 3%;
+        }
+        .dt3{
+            top: 75%;
+            position: absolute;
+            font-weight: 400;
+            font-size: 9px;
+            margin-top: 0px;
+            color: darkblue;
+            left: 3%;
+        }
+        .dt4{
+            top: 79%;
+            position: absolute;
+            font-weight: 400;
+            font-size: 9px;
+            margin-top: 1px;
+            color: darkblue;
+            left: 3%;
+        }
+    
+        .dt5{
+            top: 88%;
+            position: absolute;
+            font-weight: 600;
+            font-size: 9px;
+            margin-top: 0px;
+            color: #ff1400;
+            left: 3%;
+        }
+    

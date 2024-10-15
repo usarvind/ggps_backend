@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>School Management</title>
+    <link rel="stylesheet" href="{{config.baseUrl+'AdminPortal/assets/css/font-awesome.min.css'}}">
+    <link rel="stylesheet" href="{{config.baseUrl+'AdminPortal/assets/css/bootstrap.min.css'}}">
+    <link rel="stylesheet" href="{{config.baseUrl+'AdminPortal/assets/css/student_icard/studentIcard.css'}}">
+   
+</head>
+<body>
+    <div class="container" style="zoom: 150%;padding-bottom:0%">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="text-xenter">
+                        <div class="pp">
+                           
+                            <!-- <h4 class="companyname">Planics Solution</h4> -->
+                            <img class="company-img" src="{{config.baseUrl}}AdminPortal/student_icard/planics.png" alt="logo" >
+                          
+                            <img class="profile-img" src="{{config.baseUrl+'AdminPortal/student/'+data.studentImage}}" alt="profile image" >
+                        </div>
+                        <!-- <div class="names">
+                            <h2 class="profile-name">Smit Zadfiya</h2>
+                            <h4 class="profile-username">Web Devloper</h4>
+                        </div> -->
+                        <div class="details">
+                            <!-- {"_id":"62b6bb47b0fbab1584d8b991","firstName":"Aditya kumar","lastName":"Singh","fullname":"Aditya kumar Singh","gender":"Female","dob":"01.02.2021","joiningDate":1656527400000,"fatherName":"Anand SIngh","motherName":"Surekha SIngh","fatherMobileNo":"9876765456","studentImage":"16561387491511745.jfif","studentClass":"LKG","studentSection":"","academicYear":"2022","studentPaidFeeByStudent":1000,"totalFeeAmt":1212,"currentYearAmt":1212,"previousYearAmt":0,"presentAddress":"sadasd","permanentAddress":"asdsa","academicYearEnd":2023} -->
+                            <h4 class="dt-sn">GAYATRI GURUKUL PUBLIC SCHOOL</h4>
+                            <h4 class="dt-sn-session">Session : {{data.academicYear+'-'+data.academicYearEnd}}</h4>
+
+                            <h4 class="dt-sn-address">Saraykalidas(Jogapur),Mariahu, Jaunpur</h4>
+                            <h4 class="dt-sn-mobile">Mob. 8009905771</h4>
+                            <h4 class="dt-student-name" style="text-align: center;">{{data.fullname}}</h4>
+                            <h4 class="dt">Father's Name : <b>Mr. {{data.fatherName}}</b></h4>
+                            <h4 class="dt1">Mother's Name : <b>Mrs. {{data.motherName}}</b></h4>
+                            <h4 class="dt2">Class : <b>{{data.studentClass}}  &nbsp;&nbsp;&nbsp;Section : <b> {{data.studentSection}} </b></h4>
+                            <h4 class="dt3">DOB. : <b>{{data.dob}}</b></h4>
+                             <h4 class="dt4">Address. : <b><span>{{data.presentAddress}}</span></b></h4>
+                            <h4 class="dt5">Cont. : <b>{{data.fatherMobileNo}}</b></h4>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="pp">
+                        <h4 class="companyname">Planics Solution</h4>
+                        <img class="squre-qr" src="qr sample.png" alt="">
+                    </div>
+                    <div class="details">
+                        <h4 class="dt"><b>D.O.B. :</b>21th july 1996</h4>
+                        <h4 class="dt1"><b>M. NO. :</b>8460304196</h4>
+                        <h4 class="dt2"><b>Address. :</b>5,xyz colony,xyz near,abc road,gujarat,india</h4>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</body>
+</html>

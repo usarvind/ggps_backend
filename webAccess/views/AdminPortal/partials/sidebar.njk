@@ -1,0 +1,52 @@
+
+          <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+               <div id="sidebar-menu" class="sidebar-menu">
+                  <ul>
+                     <li class="menu-title">
+                        <span>Main Menu</span>
+                     </li>
+
+                     <li class="{% if alias=="dashboard" %} active {% endif %}">
+                        <a href="{{config.baseUrl+'admin/dashboard'}}"><i class="fas fa-user-graduate"></i> <span>Dashboard</span></a>
+                     </li>
+                     
+
+                     <li class="submenu {% if alias=='student' %}active{% endif %}">
+                        <a href="#" class=""><i class="fas fa-user-graduate"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{{config.baseUrl}}admin/students" class="{% if subalias=='students_list' %}active{% endif %}" >Student List</a></li>
+                           <li><a href="{{config.baseUrl}}Admin/student/add" class="{% if subalias=='add_student' %}active{% endif %}">Student Add</a></li>
+                           
+                        </ul>
+                     </li>
+
+                     <li class="submenu {% if alias=='student_academic' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Student Academic</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{{config.baseUrl}}admin/studentsAcademic"  class="{% if subalias=='students_academic_list' %}active{% endif %}">Student Academic</a></li>
+                        </ul>
+                     </li>
+
+
+                      <li class="submenu {% if alias=='student_fees_transaction' %}active{% endif %}">
+                        <a href="#"><i class="fas fa-file-invoice-dollar"></i> <span> Accounts</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{{config.baseUrl+'admin/feesTransaction/lists'}}" class="{% if subalias=='student_fees_transaction_list' %}active{% endif %}">Fees Collection</a></li>
+                        </ul>
+                     </li>
+
+                     <li class="submenu {% if alias=='subject' %}active{% endif %}">
+                        <a href="#" class=""><i class="fas fa-user-graduate"></i> <span> Subject Master</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{{config.baseUrl}}admin/subjects" class="{% if subalias=='subject_list' %}active{% endif %}" >Subject List</a></li>
+                           <li><a href="{{config.baseUrl}}Admin/subject/add" class="{% if subalias=='add_subject' %}active{% endif %}">Subject Add</a></li>
+                           
+                        </ul>
+                     </li>
+
+
+                  </ul>
+               </div>
+            </div>
+         </div>

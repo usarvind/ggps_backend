@@ -1,2 +1,2 @@
-# ggps_backend
-school management
+# school_management
+school management  system

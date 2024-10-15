@@ -1,0 +1,43 @@
+{
+    "pm2": {
+        "autodump": "true"
+    },
+    "pm2-health": {
+        "smtp": {
+            "host": "172.28.2.104",
+            "port": 25,
+            "from": "no-reply@tatatechnologies.com",
+            "user": "",
+            "password": "",
+            "secure": false,
+            "disabled": false
+        },
+        "mailTo": "atlapplicationsupport@tatatechnologies.com,Shruti.M.More@tatatechnologies.com",
+        "replyTo": "",
+        "batchPeriodM": 0,
+        "batchMaxMessages": 0,
+        "events": [
+            "exit"
+        ],
+        "exceptions": true,
+        "messages": true,
+        "messageExcludeExps": [],
+        "metric": {},
+        "metricIntervalS": 60,
+        "aliveTimeoutS": 300,
+        "addLogs": true,
+        "appsExcluded": [],
+        "snapshot": {
+            "url": "",
+            "token": "",
+            "auth": {
+                "user": "",
+                "password": ""
+            },
+            "disabled": false
+        }
+    },
+    "module-db-v2": {
+        "pm2-health": {}
+    }
+}

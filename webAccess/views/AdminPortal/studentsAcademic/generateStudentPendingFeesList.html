@@ -1,0 +1,134 @@
+{% extends "AdminPortal/partials/layout.njk" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.css">
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/bootstrap/css/buttons.dataTables.min.css">
+
+{% endblock %}
+
+        {% block body %}
+            <div class="content container-fluid">
+                <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">Pending Students Fees List</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{config.baseUrl+'admin'}}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{config.baseUrl+'admin/studentsAcademic'}}">Student Academic </a></li>
+                            
+                            <li class="breadcrumb-item active">Pending Fees</li>
+                        </ul>
+                    </div>
+                    <div class="col-auto text-end float-end ms-auto">
+                        <!-- <a href="add-fees.html" class="btn btn-primary"><i class="fas fa-plus"></i></a> -->
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-12">
+                    <div class="card card-table">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                            <table class="table table-hover table-center mb-0 datatable">
+                                <thead>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                   
+                                </thead>
+                                 <tbody>
+                                    {% for item in result %}
+                                    <tr>
+                                        <th>GRNo</th>
+                                        <th>Name</th>
+                                        <th>Class</th>
+                                        <th>Total Paid Fees</th>
+                                        <th>Pending Fees Till (Month)</th>
+                                        <th>Total Pending Fees</th>
+                                        <th>Father Name</th>
+                                        <th>Mobile</th>
+                                    
+                                    </tr>
+                                 
+                                    <tr>
+                                       
+                                        <td>{{item.GRNo}}</td>
+                                        <td>{{item.fullname}}</td>
+                                        <td>{{item.studentClass}}</td>
+                                        <td>{{item.studentPaidFeeByStudent}}</td>
+                                        <td>{{item.pendingFeesTillMonth}}</td>
+                                        <td>{{item.totalPendingFees}}</td>
+                                        <td>{{item.fatherName}}</td>
+                                        <td>{{item.fatherMobileNo}}</td>
+                                       
+
+                                    </tr>
+
+                                  
+                                    
+                                {% else %}
+                                    <tr>
+                                        <th>There is no details</th>
+                                    </tr>
+                                {% endfor %}
+                                </tbody> 
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endblock %}
+
+{% block script %}
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.js"></script>
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/jszip.min.js"></script>
+
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.print.min.js"></script>
+
+    <!-- <script src="{{config.baseUrl}}AdminPortal/assets/js/script.js"></script> -->
+
+
+      <script type="text/javascript">
+          $(document).ready(function(){
+            $('.datatable').DataTable({
+                    "ordering": false,
+                    "autoWidth": false,
+                    "searching": false,
+                    "lengthMenu": [ 10, 25, 50, 75, 100,200,500,1000,5000 ,10000],
+                    "dom": 'Bfrtip',
+                    "pageLength": 10000,
+                    "buttons": [
+                    // 'pageLength', 'excel',
+                        {
+                            extend: 'print',
+                            customize: function( win ) {
+                                $(win.document.body).find( 'tbody >' ).each(function(ind,ele){
+                                   // console.log(" object object : "+ind)
+                                    if(ind % 2==0){
+                                        $(this).css( 'font-weight', '650' );
+                                    }
+                                });
+
+                            }
+                        }
+                    ],
+                });
+          })
+
+
+         
+      </script>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,111 @@
+
+
+
+{% extends "AdminPortal/partials/layout.njk" %}
+
+{% block style %}
+
+{% endblock %}
+
+        {% block body %}
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row">
+                <div class="col">
+                    <h3 class="page-title">Profile</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{config.baseUrl}}admin">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                
+                <div class="tab-content profile-tab-cont">
+                    <div class="tab-pane fade show active" id="per_details_tab">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title d-flex justify-content-between">
+                                            <span>Personal Details</span>
+                                            
+                                        </h5>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Name</p>
+                                            <p class="col-sm-9">{{userData.firstName+' '+userData.lastName}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Reg. Date</p>
+                                            <p class="col-sm-9">24 Jul 1983</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Email ID</p>
+                                            <p class="col-sm-9"><a href="javascript:void(0)" class="__cf_email__" data-cfemail="046e6b6c6a606b6144617c65697468612a676b69">[{{userData.email}}]</a></p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end mb-0 mb-sm-3">Mobile</p>
+                                            <p class="col-sm-9">{{userData.mobileNumber}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <p class="col-sm-3 text-muted text-sm-end mb-0">Address</p>
+                                            <p class="col-sm-9 mb-0">{{userData.address}}
+                                            </p>
+                                            <!-- <br>
+                                            Miami,<br>
+                                            Florida - 33165,<br>
+                                            United States. -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                            <form class="needs-validation" novalidate method="post" enctype="multipart/form-data" action="{{config.baseUrl}}admin/profile-password-update">
+                                
+                                <div class="card">
+                                    <div class="card-body">
+                                    <h5 class="card-title">Change Password</h5>
+                                    <div class="row">
+                                        <div class="col-md-10 col-lg-12">
+                                            <form>
+                                                <div class="form-group">
+                                                <input type="hidden" name="id" value="{{userData._id}}"/>
+                                                <label>Old Password</label>
+                                                <input type="password" name="oldpassword" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                <label>New Password</label>
+                                                <input type="password" name="newpassword" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                <label>Confirm Password</label>
+                                                <input type="password" name="confirmpassword" class="form-control" required>
+                                                </div>
+                                                <button class="btn btn-primary" type="submit">Save Changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                       
+                        </div>
+                    </div>
+                   
+                </div>
+                </div>
+            </div>
+        </div>
+       
+        {% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+
+
+

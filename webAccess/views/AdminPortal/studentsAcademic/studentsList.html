@@ -1,0 +1,474 @@
+{% extends "AdminPortal/partials/layout.njk" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.css">
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/bootstrap/css/buttons.dataTables.min.css">
+
+{% endblock %}
+
+        {% block body %}
+        <div class="content container-fluid">
+                <div class="page-header">
+                   <div class="row align-items-center">
+                      <div class="col">
+                         <h3 class="page-title">Students Academic List</h3>
+                         <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{config.baseUrl+'admin/students'}}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Students</li>
+                         </ul>
+                      </div>
+                      <div class="col-auto text-end float-end ms-auto">
+                        
+                      </div>
+                   </div><br>
+
+                   <div class="row align-items-center">
+                        <div class="col">
+                         
+                          <div class="col-md-3" style="float: right;">
+                              <label> Select class </label>
+
+                              <select name="selectClass" id="selectCLassId" class="form-control">
+                                 <option>Please select class</option>
+                                 <option value="KG">KG</option>
+                                 <option value="LKG" selected>LKG</option>
+                                 <option value="UKG">UKG</option>
+                                 <option value="1">1st class</option>
+                                 <option value="2">2nd class</option>   
+                                 <option value="3">3rd class</option>
+                                 <option value="4">4th class</option> 
+                                 <option value="5">5th class</option>
+                                 <option value="6">6th class</option>   
+                                 <option value="7">7th class</option>
+                                 <option value="8">8th class</option> 
+                                 <option value="9">9th class</option>
+                                 <option value="10">10th class</option>   
+                                 <option value="11">11th class</option>
+                                 <option value="12">12th class</option>
+                              </select>
+                          </div>
+                          
+                          <div class="col-md-3" style="float: right;margin-right: 7px;">
+                              <div class=""> 
+                                 
+                                 <label> Select academic year</label>
+                                 <select id="selectAcademicYear" name="academicYear" required class="form-control select">
+                                       <option value="">Select year</option>
+                                       {% for yy in data.years %}
+                                       <option value="{{yy}}" {{"selected" if (data.cyear==yy) else ""}}>{{yy}}</option>
+                                       {% endfor %}
+                                       
+                                 </select>
+                              </div>
+                         </div>
+                         &nbsp;&nbsp;
+                         <div class="col-md-3" style="float: right;margin-right: 7px;">
+                           <div class=""> 
+                              <label> Select Action for Generate</label>
+                           
+                           <select  name="selectActionForAll" required class="form-control select">
+                              <option value="">Select action</option>
+                              <option value="gen_admit_card">Generate admit card</option>
+                              <option value="gen_half_year_results">Generate half year results</option>
+                              <option value="yearly_results">Generate yearly results</option>
+                              <option value="pending_fees_students_list">Generate pending fees list of students</option>
+                           </select>
+
+                           </div>
+                        </div>
+
+                         &nbsp;&nbsp;
+
+                         <div class="col-md-2" style="float: right;margin-right: 7px;">
+                           <div class="" style="padding-top: 32px;"> 
+                              <button type="button" class="btn btn-primary" id="generate_student_card" name="generate_student_card">Generate</button>
+                           </div>
+                        </div>
+
+                        </div>
+                        
+                     </div>
+                  </div>
+
+                <div class="row">
+                   <div class="col-sm-12">
+                      <div class="card card-table">
+                         <div class="card-body">
+                            <div class="table-responsive">
+                               <table class="table table-hover table-bordered table-center mb-0 datatable">
+                                  <thead>
+                                     <tr>
+                                        <th class="">Action</th>
+                                        <th>GR No</th>
+                                        <th>Name</th>
+                                        <th>Class</th>
+                                        
+                                        <th>Total Paid Fees</th>
+                                        <th>Pending Fees Till (Month)</th>
+                                        <th>Total Pending Fees</th>
+                                        <th>Admission + Exam Fees</th>
+                                        <th>Transport Fees</th>
+                                        <th>Academic Year</th>
+                                        <th>DOB</th>
+                                        <th>Previous Year Fees</th>
+                                        <th>Current Year Fees</th>
+                                        
+                                        <th>Parent Name</th>
+                                        <th>Parent Mobile</th>
+                                        <th>Reg date this academic</th>
+                                     </tr>
+                                  </thead>
+                                
+                               </table>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+        {% endblock %}
+
+{% block script %}
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.js"></script>
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/jszip.min.js"></script>
+
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.print.min.js"></script>
+
+   <!-- <script src="{{config.baseUrl}}AdminPortal/assets/js/script.js"></script> -->
+      <script type="text/javascript">
+         let tableIntance="";
+         $(document).ready(function () {
+          
+            callTable()
+         });
+
+
+         function callTable(){
+            if(tableIntance){
+               tableIntance.destroy();
+            }
+
+            let studentClass = $('select[name="selectClass"]').val();
+
+            let academicYear=$('select[name="academicYear"]').val();
+
+            console.log("++++++++++++++++++++ : "+studentClass)
+            var host = window.location.origin;
+            console.log("-------------------- : "+host)
+            tableIntance = $('.datatable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            // "searching": false,
+            "lengthMenu": [ 10, 25, 50, 75, 100,200,500,1000,5000 ],
+            "dom": 'Bfrtip',
+            "buttons": [
+               'pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "language": {
+                     searchPlaceholder: "Search by name "
+            },
+            "ordering": false,
+            "autoWidth": false,
+            "pageLength": 10,
+            "ajax":{
+               "dataType": "json",
+               "url":host + "/admin/studentAcademicMaster/getAllList",
+               "method":"POST",
+               "data":{"sclass":studentClass,academicYear:academicYear},
+               "dataSrc":function(apiResponse){
+                  console.log("==============888888888888================ : ",apiResponse)
+                  return apiResponse.data;
+               }
+            }, 
+            initComplete: function() {
+                  console.log(" we are hereeeeeeeeeeeeeeeeeeeeee")
+            },
+            "columns": [
+               { "data": "action",render: function (data, type, row) {
+                     
+                  // <a title="Delete Record" href="javascript:void(0)" onclick="return deleteChk(this)" id="${row._id}" class="btn btn-sm bg-danger-light">
+                  //                 <i class="fas fa-trash"></i>
+                  //              </a>
+                  
+                     return `<div class="actions">
+                              <a action="half_year" title="Student half year marksheet create " href="javascript:void(0)" onclick="return resultGanerate(this)" id="${row._id}" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-certificate"></i>
+                              </a>
+
+                              <a action="yearly" title="Student yearly marksheet create " href="javascript:void(0)" onclick="return resultGanerate(this)" id="${row._id}" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-certificate"></i>
+                              </a>
+
+
+                              <a title="View student icard" href="javascript:void(0)"  onclick="return icard(this)" id="${row._id}" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-eye"></i>
+                               </a>
+
+                               <a title="View student detail" href="javascript:void(0)" onclick="return show(this)" id="${row._id}" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-eye"></i>
+                               </a>
+
+                               <a title="Fees Payment" href="javascript:void(0)" onclick="return payFees(this)" id="${row._id}" class="btn btn-sm bg-success-light me-2">
+                                  <i class="fas fa-rupee-sign"></i>
+                               </a>
+
+                               <a title="Upload Mark" href="javascript:void(0)" onclick="return marksheet_popup(this)" id="${row._id}" class="btn btn-sm bg-success-light me-2">
+                                  <i class="fas fa-calculator"></i>
+                               </a>
+
+                               <a title="Student Academic Details Update" href="javascript:void(0)" onclick="return studentAcademicDetailUpdate(this)" id="${row._id}" class="btn btn-sm bg-primary-light me-2">
+                                  <i class="fas fa-pen"></i>
+                               </a>
+                               
+                               <a title="Fees Paid Details" href="javascript:void(0)" onclick="return paidFees(this)" id="${row._id}" class="btn btn-sm bg-primary-light">
+                                  <i class="fas fa-eye"></i>
+                               </a>
+                             
+                            </div>`;
+                 }
+                },
+                { "data": "GRNo" ,  render: function (data, type, row) {
+                     
+                    return (row.GRNo)?(row.GRNo):"";
+                } 
+               },
+               { "data": "fullname" ,  render: function (data, type, row) {
+                    return row.firstName+" "+row.lastName;
+                }
+               },
+               { "data": "studentClass" ,  render: function (data, type, row) {
+                    return row.studentClass;
+                }
+               },
+
+              
+
+                { "data": "totalPaid" ,  render: function (data, type, row) {
+                     let totPaidData = ((row.studentPaidFeeByStudent<=0)?'0':`<span style="color:green">${(row.studentPaidFeeByStudent)}</span>`);
+
+                    return totPaidData;
+                }
+               },
+
+               { "data": "tillPendingFeeMonth" ,  render: function (data, type, row) {
+
+                 
+                   let totPendtData = ((row.totalUptodateFeesAmount < row.studentPaidFeeByStudent)?`<span style="color:green">${"(+)"+(row.studentPaidFeeByStudent-1*row.totalUptodateFeesAmount)}</span>`:`<span style="color:red">${""+(row.studentPaidFeeByStudent-(1*row.totalUptodateFeesAmount))}</span>`);
+                    return totPendtData;
+                }
+               },
+                { "data": "totalPending" ,  render: function (data, type, row) {
+                   //console.log("====================== : ",row)
+                   let totPendtData = ((row.totalFeeAmt==row.studentPaidFeeByStudent)?'0':`<span style="color:red">${(row.totalFeeAmt-row.studentPaidFeeByStudent)}</span>`);
+                    return totPendtData;
+                }
+               },
+               { "data": "totalAdmissionFees" ,  render: function (data, type, row) {
+                   //console.log("====================== : ",row)
+                   let totPendtData = ((row.admissionFeeAmt)?row.admissionFeeAmt:``);
+                   let examFees=((row.totalExamFeesAmt)?row.totalExamFeesAmt:``);
+                    return totPendtData+'+'+examFees;
+                }
+               },
+
+               { "data": "totalTransport" ,  render: function (data, type, row) {
+                   //console.log("====================== : ",row)
+                   let totTransData = ((row.totaltransportFees)?row.totaltransportFees:``);
+                    return totTransData;
+                }
+               },
+
+               { "data": "academicYear" ,  render: function (data, type, row) {
+                  // console.log("====================== : ",row)
+                    return (row.academicYear)?row.academicYear:"";
+                }
+               },
+             
+               { "data": "dob",render: function (data, type, row) {
+                  var day = moment(row.dob); //milliseconds
+                  return (day.format('DD-MM-YYYY'));
+                } },
+
+                { "data": "previousYear" ,  render: function (data, type, row) {
+                  // console.log("====================== : ",row)
+                    return row.previousYearAmt;
+                }
+               },
+
+               { "data": "currentYear" ,  render: function (data, type, row) {
+                   //console.log("====================== : ",row)
+                   return (row.currentYearFeeAmt)?row.currentYearFeeAmt:'';
+                }
+               },
+
+               { "data": "fatherName" },
+               { "data": "fatherMobileNo"},
+               { "data": "registerDate",render: function (data, type, row) {
+                  var day = moment(row.createdAt); //milliseconds
+                  return (day.format('DD-MM-YYYY'));
+                } },
+            ]
+            });
+         }
+
+  
+         function show(ths){
+                  if(confirm("Are you sure you want to view this?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     window.location= window.origin+'/admin/studentAcademic/viewDetails/'+id;
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+         }
+
+
+         function resultGanerate(ths){
+                  if(confirm("Are you sure you want to create marksheet?")){
+                     let id = $(ths).attr("id");
+                     let action=$(ths).attr("action");
+                     console.log("===================== : "+window.origin)
+                     //window.location= window.origin+'/admin/studentAcademic/createHalfYearMarksheet/'+id;
+
+                     window.open(window.origin+'/admin/studentAcademic/generateResult/'+id+'/'+action,"_blank")
+
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+         }
+
+         
+   
+
+         function icard(ths){
+                  if(confirm("Are you sure you want to view icard?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     //window.location= window.origin+'/admin/studentAcademic/icardGenerate/'+id;
+                     window.open(window.origin+'/admin/studentAcademic/icardGenerate/'+id,"_blank")
+                     
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+         }
+         
+
+         function payFees (ths){
+            if(confirm("Are you sure you want to pay fees ?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     let obj={"id":id}
+                     callDynamicModal('student_fees_payment_modal',obj)
+            }
+            else{
+               return false;
+            }
+         }
+
+         function marksheet_popup (ths){
+            if(confirm("Are you sure you want to upload marks ?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     let obj={"id":id}
+                     callDynamicModal('student_marksupload_modal',obj)
+            }
+            else{
+               return false;
+            }
+         }
+
+
+         
+
+         function paidFees(ths){
+                  if(confirm("Are you sure you want this?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     //window.location= window.origin+'/admin/studentsAcademic/paidFeesList/'+id;
+
+                     window.open( window.origin+'/admin/studentsAcademic/paidFeesList/'+id,"_blank")
+
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+         }
+
+         function studentAcademicDetailUpdate(ths){
+                  if(confirm("Are you sure you want to update this details?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     let obj={"id":id}
+                     callDynamicModal('update_academic_student_modal',obj)
+                  
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+      }
+
+      $(document).on('change','#selectCLassId , #selectAcademicYear', function(){
+         callTable()
+      });
+
+
+      $(document).on('click','#generate_student_card', function(){
+
+         let selAction = $('select[name="selectActionForAll"]').val();
+         if(selAction){
+             let academicYear = $('#selectAcademicYear').val();
+            let selectClass = $('#selectCLassId').val();
+            if(!academicYear){
+               alert(" please select academic year ")
+            }else{
+
+               let conf =confirm("Are you sure ?");
+               if(conf){
+                  if(selAction=='gen_admit_card'){
+                        window.open(window.origin+'/admin/studentsAcademic/generateExamCard/'+academicYear+'/'+selectClass,"_blank")
+
+                  }else if(selAction=='gen_half_year_results'){
+
+                     window.open(window.origin+'/admin/studentsAcademic/generateStudentResults/'+academicYear+'/'+selectClass+'/half_year',"_blank")
+
+
+                  }else if(selAction=='yearly_results'){
+                     window.open(window.origin+'/admin/studentsAcademic/generateStudentResults/'+academicYear+'/'+selectClass+'/yearly',"_blank")
+                  }else if(selAction=='pending_fees_students_list'){
+                     
+                     window.open(window.origin+'/admin/studentAcademic/generateStudentPendingFeesList/'+academicYear+'/'+selectClass,"_blank")
+                  }
+               }else{
+                  return;
+               }
+              
+            }
+
+         }else{
+            alert(" Select action from dropdown ..")
+         }
+
+        
+        
+         
+      });
+      
+      
+
+
+      </script>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,93 @@
+{% extends "AdminPortal/partials/layout.njk" %}
+
+{% block style %}
+
+{% endblock %}
+
+        {% block body %}
+        <div class="content container-fluid">
+         <div class="page-header">
+            <div class="row align-items-center">
+               <div class="col">
+                  <h3 class="page-title">Edit Students</h3>
+                  <ul class="breadcrumb">
+                     <li class="breadcrumb-item"><a href="{{config.baseUrl}}admin/students">Students</a></li>
+                     <li class="breadcrumb-item active">Edit Students</li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12">
+               <div class="card">
+                  <div class="card-body">
+                     <form class="needs-validation" novalidate method="post" action="{{config.baseUrl+'admin/subject/updateMasterRecord'}}" enctype="multipart/form-data">
+                        <div class="row">
+                           <div class="col-12">
+                              <h5 class="form-title"><span>Subject Information</span></h5>
+                           </div>
+                           
+                           <input type="hidden" name="_id" value="{{subjectData._id}}">
+
+                           <div class="col-4">
+                              <div class="form-group">
+                                 <label>Subject Name</label>
+                                 <input type="text" required name="subjectName" value="{{subjectData.subjectName}}" class="form-control">
+                              </div>
+                           </div>
+                           
+                           <div class="col-3">
+                              <div class="form-group">
+                                 <label> Class</label>
+                                 <select name="selectClass" id="selectCLassId" class="form-control">
+                                    <option value="" selected>Please select class</option>
+                                    {% for row in classes %}
+                                     <option value="{{row.value}}" {{"selected" if (row.value==subjectData.selectClass) else ""}}>{{row.key}}</option>
+                                    {% endfor %}
+                                 </select>
+                              </div>
+                           </div>
+
+                           <div class="col-4">
+                              <div class="form-group">
+                                 <label> Subject Sequence</label>
+                                 <select name="subjectSequence" required id="subjectSequence" class="form-control">
+                                    <option value="" selected>Select sequence</option>
+                                    {% for val in subjectSequence %}
+                                      <option value="{{val}}" {{"selected" if (val==subjectData.subjectSequence) else ""}}>{{val}}</option>
+                                    {% endfor %}
+                                 </select>
+                              </div>
+                           </div>
+
+                           <div class="col-12">
+                              <div class="col-3">
+                                 <div class="form-group">
+                                    <input id="sjfg" type="checkbox" value="true" name="subjectJustForGrade" {{"checked" if (subjectData.subjectJustForGrade==true) else ""}}>
+                                    <label for="sjfg"> Subject just for grade</label>
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           
+                           <div class="col-12">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+        {% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+    
+  </script>
+{% endblock %}
+
+
+
+

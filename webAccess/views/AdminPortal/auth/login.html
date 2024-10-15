@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+      <title>{{config.siteName}} - Login</title>
+      <link rel="shortcut icon" href="{{config.baseUrl}}AdminPortal/assets/img/favicon.png">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&display=swap">
+      <link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/fontawesome/css/fontawesome.min.css">
+      <link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/fontawesome/css/all.min.css">
+      <link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/css/style.css">
+      <link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/css/toastr.min.css">
+      
+   </head>
+   <body>
+      <div class="main-wrapper login-body">
+         <div class="login-wrapper">
+            <div class="container">
+               <div class="loginbox">
+                  <div class="login-left">
+                     <img class="img-fluid" src="{{config.baseUrl}}AdminPortal/assets/img/logo-white.png" alt="Logo">
+                  </div>
+                  <div class="login-right">
+                     <div class="login-right-wrap">
+                        <h1>Login</h1>
+                        <p class="account-subtitle">Access to our dashboard</p>
+                        
+                        <form method="post" action="{{config.baseUrl+'admin/loginSubmit'}}" enctype="multipart/form-data">
+                           <div class="form-group">
+                              <input class="form-control" value="" name="email" type="email" placeholder="Email" required>
+                           </div>
+                           <div class="form-group">
+                              <input class="form-control" value="" name="password" type="password" placeholder="Password" required>
+                           </div>
+                           <div class="form-group">
+                              <button class="btn btn-primary btn-block" type="submit">Login</button>
+                           </div>
+                        </form>
+                        <div class="text-center forgotpass"><a href="{{config.baseUrl+'admin/forgot'}}">Forgot Password?</a></div>
+                        <!-- <div class="login-or">
+                           <span class="or-line"></span>
+                           <span class="span-or">or</span>
+                        </div>
+                        <div class="social-login">
+                           <span>Login with</span>
+                           <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="google"><i class="fab fa-google"></i></a>
+                        </div> -->
+                        <!-- <div class="text-center dont-have">Don’t have an account? <a href="register.html">Register</a></div> -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="{{config.baseUrl}}AdminPortal/assets/js/jquery-3.6.0.min.js"></script>
+      <script src="{{config.baseUrl}}AdminPortal/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="{{config.baseUrl}}AdminPortal/assets/js/script.js"></script>
+      <script type="text/javascript" src="{{config.baseUrl}}AdminPortal/assets/js/toastr.min.js"></script>
+      
+      {% if(error|length)>0 %}
+      <script type="text/javascript">
+         $.toast({ heading: 'Error', text: "{{error | safe }}", position: 'top-right', icon: 'error' });
+      </script>
+      {% endif %}
+
+      {% if(success|length)>0 %}
+      <script type="text/javascript">
+         $.toast({ heading: 'Success', text: "{{success | safe }}", position: 'top-right', icon: 'success' });
+      </script>
+      {% endif %}
+   </body>
+</html>

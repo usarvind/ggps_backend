@@ -1,0 +1,250 @@
+{% extends "AdminPortal/partials/layout.njk" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.css">
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/bootstrap/css/buttons.dataTables.min.css">
+
+{% endblock %}
+
+        {% block body %}
+            <div class="content container-fluid">
+                <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">Fees</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{config.baseUrl+'admin'}}">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Fees</li>
+                        </ul>
+                    </div>
+                    <div class="col-auto text-end float-end ms-auto">
+                        <!-- <a href="#" class="btn btn-outline-primary me-2"><i class="fas fa-download"></i> Download</a> -->
+                        <!-- <a href="add-fees.html" class="btn btn-primary"><i class="fas fa-plus"></i></a> -->
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group row">
+                            <label class="col-lg-5 col-form-label">Please Select Filter</label>
+                            <div class="col-lg-7">
+                                <select id="filterDropdown" name="filteration" class="form-control">
+                                    <option value="0D">Today</option>
+                                    <option value="7D">Last Seven Day</option>
+                                    <option value="CM">Current Month</option>
+                                    <option value="PM">Previous Month</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group row">
+                            <label class="col-lg-5 col-form-label"><b>Total Collection</b></label>
+                            <div class="col-lg-7">
+                            <input type="text" class="form-control" style="font-weight: 800;" id="totalFeesCollect" value="0" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-12">
+                    <div class="card card-table">
+                        
+                       
+                        <div class="card-body">
+                            <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-center mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Transaction Date</th>
+                                        <th>Name</th>
+                                        <th>Father Name</th>
+                                        <th>Class</th>
+                                        <th>Amount</th>
+                                        
+                                        <th>Transaction ID</th>
+                                        <th>Ref. ID</th>
+                                    </tr>
+                                </thead>
+                                <!-- <tbody>
+                                   
+                                </tbody> -->
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endblock %}
+
+{% block script %}
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.js"></script>
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/jszip.min.js"></script>
+
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.print.min.js"></script>
+      
+      <!-- <script src="{{config.baseUrl}}AdminPortal/assets/js/script.js"></script> -->
+      <script type="text/javascript">
+
+         $(document).ready(function () {
+            var host = window.location.origin;
+            console.log("-------------------- : "+host)
+            var table = $('.datatable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "dom": 'Bfrtip',
+            "lengthMenu": [ 10, 25, 50, 75, 100,200,500,1000,5000 ],
+            "buttons": [
+               'pageLength', 'csv', 'print'
+            ],
+             "searching": false,
+            "language": {
+                    // searchPlaceholder: "Search by name or class "
+            },
+            "ordering": false,
+            "autoWidth": false,
+            "pageLength": 10,
+            "ajax":{
+               "dataType": "json",
+               "url":host + "/admin/feesTransaction/getAllList",
+               "method":"POST",
+               "data": function (d) {
+                    d.dropdownValue = $('#filterDropdown').val(); // Append dropdown value
+                },
+               "dataSrc":function(apiResponse){
+                  //console.log("==============888888888888================ : ",apiResponse)
+                  return apiResponse.data.result;
+               },
+               complete: function(response) {
+                  let totalFees = response.responseJSON.data.totalFeesCollect;
+                  $('#totalFeesCollect').val(totalFees);
+             }
+            }, 
+            "columns": [
+               { "data": "action",render: function (data, type, row) {
+                     
+                     return ` <td>
+                                <a title="Print student fees details" href="javascript:void(0)" onclick="return printDetails(this)" id="${row._id}" acadmicId="${row.studentAcademicId}" class="btn btn-sm bg-primary-light">
+                                    <i class="fas fa-print"></i>
+                                    </a>
+                            </td>`;
+                 }
+                },
+             
+                
+               
+               { "data": "txnDate" ,  render: function (data, type, row) {
+                    var day = moment(row.transactionDate); //milliseconds
+                    return (day.format('DD-MM-YYYY HH:MM A'));
+                }
+               },
+
+               { "data": "fullname",render: function (data, type, row) {
+                    return row.firstName+" "+row.lastName;
+
+                
+                } },
+
+                { "data": "fathername" ,  render: function (data, type, row) {
+                    return row.fatherName;
+                }
+               },
+
+                { "data": "studentClass" ,  render: function (data, type, row) {
+                  // console.log("====================== : ",row)
+                    return row.studentClass;
+                }
+               },
+             
+                { "data": "feesAmount" ,  render: function (data, type, row) {
+                   //console.log("====================== : ",row)
+                    return row.feesAmount;
+                }
+               },
+
+
+               { "data": "transactionId" ,  render: function (data, type, row) {
+
+                //console.log("--------------------- : ",row)
+                return row.transactionId;
+                }
+                },
+                { "data": "onlineRefNo" ,  render: function (data, type, row) {
+                return row.onlineRefNo;
+                }
+                },
+            ]
+            });
+            
+
+               // Handle dropdown change
+                $('#filterDropdown').change(function() {
+                    $('#totalFeesCollect').val(0);
+                    table.ajax.reload(); // Reload DataTable with new parameters
+                });
+        });
+
+  
+         function show(ths){
+                  if(confirm("Are you sure you want to view this?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     window.location= window.origin+'/admin/student/viewDetails/'+id;
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+         }
+
+         function payFees (ths){
+            if(confirm("Are you sure you want to view this?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     let obj={"id":id}
+                     callDynamicModal('student_fees_payment_modal',obj)
+            }
+            else{
+               return false;
+            }
+         }
+
+         function printDetails(ths){
+                  if(confirm("Are you sure you want to print details ?")){
+                     let id = $(ths).attr("id");
+                     let academicId = $(ths).attr("acadmicId");
+                     console.log("===================== : "+window.origin)
+                     window.open(window.origin+'/admin/studentAcademic/printFeesReceipt/'+id+'/no/'+academicId,"_blank")
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+         }
+          
+
+         function studentAcademicDetailUpdate(ths){
+                  if(confirm("Are you sure you want to update this details?")){
+                     let id = $(ths).attr("id");
+                     console.log("===================== : "+window.origin)
+                     let obj={"id":id}
+                     callDynamicModal('update_academic_student_modal',obj)
+                  
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+      }
+
+      </script>
+{% endblock %}
+
+
+
+

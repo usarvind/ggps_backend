@@ -1,0 +1,125 @@
+{% extends "AdminPortal/partials/layout.njk" %}
+
+{% block style %}
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.css">
+<link rel="stylesheet" href="{{config.baseUrl}}AdminPortal/assets/plugins/bootstrap/css/buttons.dataTables.min.css">
+
+{% endblock %}
+
+        {% block body %}
+            <div class="content container-fluid">
+                <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">Student Fees Details List</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{config.baseUrl+'admin'}}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{config.baseUrl+'admin/studentsAcademic'}}">Student Academic </a></li>
+                            
+                            <li class="breadcrumb-item active">Fees</li>
+                        </ul>
+                    </div>
+                    <div class="col-auto text-end float-end ms-auto">
+                        <!-- <a href="add-fees.html" class="btn btn-primary"><i class="fas fa-plus"></i></a> -->
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-12">
+                    <div class="card card-table">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                            <table class="table table-hover table-center mb-0 datatable">
+                                <thead>
+
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Transaction Date</th>
+                                        <th>Ref. ID</th>
+                                        <th>Name</th>
+                                        <th>Father Name</th>
+                                        <th>Class</th>
+                                        <th>Amount</th>
+                                        <th>Transaction ID</th>
+                                    </tr>
+                                </thead>
+                                 <tbody>
+                                    {% for item in data %}
+                                        <tr>
+                                            <td>
+                                                <a title="Print student fees details" href="javascript:void(0)" onclick="return printDetails(this)" id="{{item._id}}" acadmicId="{{item.studentAcadmicId}}" class="btn btn-sm bg-primary-light">
+                                                    <i class="fas fa-print"></i>
+                                                 </a>
+                                            </td>
+                                            <td>{{item.transactionDate}}</td>
+                                            <td>{{item.onlineRefNo}}</td>
+                                            <td>{{item.firstName+" "+item.lastName}}</td>
+                                            <td>{{item.fatherName}}</td>
+                                            <td>{{item.studentClass}}</td>
+                                            <td>{{item.feesAmount}}</td>
+                                            <td>{{item.transactionId}}</td>
+                                           
+
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <th>There is no details</th>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody> 
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endblock %}
+
+{% block script %}
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/datatables.min.js"></script>
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/jszip.min.js"></script>
+
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="{{config.baseUrl}}AdminPortal/assets/plugins/datatables/buttons.print.min.js"></script>
+
+    <!-- <script src="{{config.baseUrl}}AdminPortal/assets/js/script.js"></script> -->
+
+
+      <script type="text/javascript">
+          $(document).ready(function(){
+            $('.datatable').DataTable({
+                   
+                    // "searching": false,
+                    "lengthMenu": [ 10, 25, 50, 75, 100,200,500,1000,5000 ],
+                    "dom": 'Bfrtip',
+                    "buttons": [
+                    'pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'
+                    ],
+                    "language": {
+                            searchPlaceholder: "Search by name "
+                    },
+                });
+          })
+
+
+          function printDetails(ths){
+                  if(confirm("Are you sure you want to print details ?")){
+                     let id = $(ths).attr("id");
+                     let academicId = $(ths).attr("acadmicId");
+                     console.log("===================== : "+window.origin)
+                     window.open(window.origin+'/admin/studentAcademic/printFeesReceipt/'+id+'/yes/'+academicId,"_blank")
+                  }
+                  else{
+                     return false;
+                  }
+            console.log("--------------------")
+         }
+         
+      </script>
+{% endblock %}
+
+
+
+
