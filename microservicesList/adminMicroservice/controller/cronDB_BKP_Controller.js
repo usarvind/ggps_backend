@@ -35,7 +35,7 @@ const cron = require('node-cron');
 var dbOptions =  {
     user: 'gayatrigps',
     pass: 'gayatrigps9876',
-    host: '172.31.9.128', //13.233.116.27
+    host: '172.31.0.102', // EC2 Private IP
     port: 27017,
     database: 'school', //school
     autoBackup: true, 
